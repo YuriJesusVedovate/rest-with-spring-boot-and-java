@@ -1,4 +1,4 @@
-package br.com.yuri;
+package br.com.yuri.Greeting;
 
 public class Greeting {
 
