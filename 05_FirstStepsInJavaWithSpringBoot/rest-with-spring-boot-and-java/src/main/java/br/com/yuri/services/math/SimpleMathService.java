@@ -1,6 +1,6 @@
-package br.com.yuri.Math;
+package br.com.yuri.services.math;
 
-public class SimpleMath {
+public class SimpleMathService {
 
         public Double sum(Double firstNumber, Double secondNumber) {
             return firstNumber + secondNumber;

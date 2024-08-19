@@ -1,4 +1,4 @@
-package br.com.yuri.Greeting;
+package br.com.yuri.model;
 
 public class Greeting {
 
