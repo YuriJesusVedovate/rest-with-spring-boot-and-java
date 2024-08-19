@@ -16,6 +16,10 @@ public class Person implements Serializable {
     public Person() {
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public String getFirstName() {
         return firstName;
     }

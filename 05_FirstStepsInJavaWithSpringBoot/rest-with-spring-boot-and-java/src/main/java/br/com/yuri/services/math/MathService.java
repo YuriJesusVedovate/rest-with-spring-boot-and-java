@@ -4,7 +4,7 @@ import br.com.yuri.exceptions.UnsupportedMathOperationException;
 import br.com.yuri.services.math.numberConverter.NumberConverterService;
 
 public class MathService {
-    
+
     private final SimpleMathService math = new SimpleMathService();
 
     public Double Sum(String numberOne, String numberTwo) throws Exception {
