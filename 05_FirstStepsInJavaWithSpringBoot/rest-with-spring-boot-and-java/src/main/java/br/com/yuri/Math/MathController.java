@@ -14,7 +14,7 @@ public class MathController {
             Double num1 = convertToDouble(numberOne);
             Double num2 = convertToDouble(numberTwo);
             return num1 + num2;
-        } catch (IllegalArgumentException e) {
+        } catch (UnsupportedMathOperationException e) {
             throw new UnsupportedMathOperationException(String.format("Invalid input: both parameters should be valid numbers. Error: %s", e.getMessage()));
         }
         catch (Exception e) {
@@ -24,7 +24,7 @@ public class MathController {
 
     private Double convertToDouble(String strNumber) {
         if (strNumber == null || !isNumeric(strNumber.replaceAll(",", "."))) {
-            throw new IllegalArgumentException();
+            throw new UnsupportedMathOperationException();
         }
         return Double.parseDouble(strNumber.replaceAll(",", "."));
     }

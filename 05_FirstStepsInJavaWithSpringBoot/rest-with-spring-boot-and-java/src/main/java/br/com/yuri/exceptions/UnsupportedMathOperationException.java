@@ -8,8 +8,12 @@ import java.io.Serial;
 @ResponseStatus(HttpStatus.BAD_REQUEST)
 public class UnsupportedMathOperationException extends RuntimeException {
 
+        @Serial
         private static final long serialVersionUID = 1L;
 
+
+        public UnsupportedMathOperationException() {
+        }
         public UnsupportedMathOperationException(String message) {
             super(message);
     }
