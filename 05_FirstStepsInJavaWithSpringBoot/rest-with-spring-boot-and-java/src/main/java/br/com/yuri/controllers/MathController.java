@@ -6,9 +6,11 @@ import br.com.yuri.exceptions.UnsupportedMathOperationException;
 import br.com.yuri.services.math.numberConverter.NumberConverterService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/math")
 public class MathController {
 
     private final MathService mathService = new MathService();
@@ -18,7 +20,7 @@ public class MathController {
         return mathService.Sum(numberOne, numberTwo);
     }
 
-    @GetMapping("/sub/{numberOne}/{numberTwo}")
+    @GetMapping("/subtraction/{numberOne}/{numberTwo}")
     public Double subtraction(@PathVariable String numberOne, @PathVariable String numberTwo) throws Exception {
         return mathService.Subtraction(numberOne, numberTwo);
     }
@@ -38,7 +40,7 @@ public class MathController {
         return mathService.Mean(numberOne, numberTwo);
     }
 
-    @GetMapping("/squareRoot/{number}")
+    @GetMapping("/square-root/{number}")
     public Double squareRoot(@PathVariable String number) throws Exception {
         return mathService.SquareRoot(number);
     }

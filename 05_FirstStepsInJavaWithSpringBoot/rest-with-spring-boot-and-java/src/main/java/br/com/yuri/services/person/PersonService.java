@@ -3,6 +3,8 @@ package br.com.yuri.services.person;
 import br.com.yuri.model.Person;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.logging.Logger;
 
@@ -12,26 +14,37 @@ public class PersonService {
     private final AtomicLong counter = new AtomicLong();
     private Logger logger = Logger.getLogger(PersonService.class.getName());
 
+    private final List<Person> personList = new ArrayList<>();
+
+    public PersonService() {
+        generatePersons();
+    }
+
     public Person findById(String id) {
         logger.info("Finding person by id: " + id);
 
-        Person person =  new Person(){
-            {
-                setId(counter.incrementAndGet());
-                setFirstName("Yuri");
-                setLastName("Vedovate");
-                setAddress("São Paulo - Brazil");
-                setGender("Male");
-            }
-        };
-        return person;
+        return personList.stream()
+                .filter(p -> p.getId() == Long.parseLong(id))
+                .findFirst()
+                .orElse(null);
     }
 
-    public Logger getLogger() {
-        return logger;
+    public List<Person> findAll() {
+        logger.info("Finding all people");
+        return personList;
     }
 
-    public void setLogger(Logger logger) {
-        this.logger = logger;
+    private void generatePersons() {
+        for (int i = 1; i <= 10; i++) {
+            Person person = new Person();
+            person.setId(counter.incrementAndGet());
+            person.setFirstName("FirstName " + i);
+            person.setLastName("LastName " + i);
+            person.setAddress("Address " + i);
+            person.setGender(i % 2 == 0 ? "Male" : "Female");
+            personList.add(person);
+        }
     }
+
+
 }

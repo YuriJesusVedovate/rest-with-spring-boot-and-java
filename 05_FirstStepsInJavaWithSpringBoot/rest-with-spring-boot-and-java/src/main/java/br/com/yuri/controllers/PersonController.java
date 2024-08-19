@@ -5,6 +5,8 @@ import br.com.yuri.services.person.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/person")
 public class PersonController {
@@ -13,7 +15,12 @@ public class PersonController {
     private PersonService service;
 
     @GetMapping(value = "/{id}", produces = "application/json")
-    public Person person(@PathVariable String id) {
+    public Person findById(@PathVariable String id) {
         return service.findById(id);
+    }
+
+    @GetMapping("/all")
+    public List<Person> all() {
+        return service.findAll();
     }
 }
