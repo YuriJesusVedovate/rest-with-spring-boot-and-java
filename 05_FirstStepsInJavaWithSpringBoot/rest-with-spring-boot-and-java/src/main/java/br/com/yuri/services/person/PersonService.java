@@ -1,6 +1,6 @@
 package br.com.yuri.services.person;
 
-import br.com.yuri.model.Person;
+import br.com.yuri.models.Person;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

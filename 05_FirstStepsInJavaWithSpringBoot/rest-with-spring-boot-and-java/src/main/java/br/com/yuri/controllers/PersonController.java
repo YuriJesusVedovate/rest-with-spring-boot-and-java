@@ -1,6 +1,6 @@
 package br.com.yuri.controllers;
 
-import br.com.yuri.model.Person;
+import br.com.yuri.models.Person;
 import br.com.yuri.services.person.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
