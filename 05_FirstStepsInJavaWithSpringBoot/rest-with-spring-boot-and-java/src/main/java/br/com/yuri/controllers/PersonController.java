@@ -14,7 +14,7 @@ public class PersonController {
     @Autowired
     private PersonService service;
 
-    @GetMapping(value = "/{id}", produces = "application/json")
+    @GetMapping(value = "/{id}")
     public Person findById(@PathVariable String id) {
         return service.findById(id);
     }
@@ -23,4 +23,20 @@ public class PersonController {
     public List<Person> all() {
         return service.findAll();
     }
+
+    @PostMapping()
+    public Person create(@RequestBody Person person) {
+        return service.Create(person);
+    }
+
+    @PutMapping("/{id}")
+    public Person update(@RequestBody Person person, @PathVariable String id) {
+        return service.Update(person, id);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable String id){
+        service.Delete(id);
+    }
+
 }

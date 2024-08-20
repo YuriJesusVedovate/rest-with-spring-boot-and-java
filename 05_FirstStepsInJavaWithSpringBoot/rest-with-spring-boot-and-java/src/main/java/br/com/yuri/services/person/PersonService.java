@@ -34,6 +34,36 @@ public class PersonService {
         return personList;
     }
 
+    public Person Create(Person person) {
+        logger.info("Creating person: " + person.getFirstName());
+        person.setId(counter.incrementAndGet());
+        personList.add(person);
+        return person;
+    }
+
+    public Person Update(Person person, String id) {
+        logger.info("Updating person by id: " + id);
+        personList.stream()
+                .filter(p -> p.getId() == Long.parseLong(id))
+                .forEach(p -> {
+                    p.setFirstName(person.getFirstName());
+                    p.setLastName(person.getLastName());
+                    p.setAddress(person.getAddress());
+                    p.setGender(person.getGender());
+                });
+
+        return personList.stream()
+                .filter(p -> p.getId() == Long.parseLong(id))
+                .findFirst()
+                .orElse(null);
+    }
+
+    public void Delete(String id){
+        logger.info("Deleting person with id: " + id);
+
+        personList.removeIf(p -> p.getId() == Long.parseLong(id));
+    }
+
     private void generatePersons() {
         for (int i = 1; i <= 10; i++) {
             Person person = new Person();
