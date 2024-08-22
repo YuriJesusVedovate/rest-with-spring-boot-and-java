@@ -1,6 +1,7 @@
 package br.com.yuri.services.person;
 
-import br.com.yuri.data.vo.PersonVO;
+import br.com.yuri.data.vo.v1.PersonVO;
+import br.com.yuri.data.vo.v2.PersonVOV2;
 import br.com.yuri.exceptions.ResourceNotFoundException;
 import br.com.yuri.mapper.Mapper;
 import br.com.yuri.models.Person;
@@ -44,6 +45,13 @@ public class PersonService {
         return Mapper.parseObject(person, PersonVO.class);
     }
 
+    public PersonVOV2 createV2(PersonVOV2 request) {
+        logger.info("Creating person V2: " + request.getFirstName());
+        Person person = Mapper.parseObject(request, Person.class);
+        person = personRepository.save(person);
+        return Mapper.parseObject(person, PersonVOV2.class);
+    }
+
     public PersonVO update(PersonVO request, Long id) {
         logger.info("Updating person by id: " + id);
 
@@ -58,6 +66,22 @@ public class PersonService {
         personRepository.save(person);
 
         return Mapper.parseObject(person, PersonVO.class);
+    }
+
+    public PersonVOV2 updateV2(PersonVOV2 request, Long id) {
+        logger.info("Updating person V2 by id: " + id);
+
+        Person person = personRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Person not found for this id: " + id));
+
+        person.setFirstName(request.getFirstName());
+        person.setLastName(request.getLastName());
+        person.setAddress(request.getAddress());
+        person.setGender(request.getGender());
+
+        personRepository.save(person);
+
+        return Mapper.parseObject(person, PersonVOV2.class);
     }
 
     public void delete(Long id) {

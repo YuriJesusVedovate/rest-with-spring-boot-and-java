@@ -1,4 +1,4 @@
-package br.com.yuri.data.vo;
+package br.com.yuri.data.vo.v1;
 
 import java.io.Serial;
 import java.io.Serializable;
