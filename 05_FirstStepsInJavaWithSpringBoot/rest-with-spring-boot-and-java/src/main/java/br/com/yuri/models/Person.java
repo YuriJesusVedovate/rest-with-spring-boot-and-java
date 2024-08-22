@@ -6,6 +6,7 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
+@SuppressWarnings("JpaDataSourceORMInspection")
 @Entity
 @Table(name = "person")
 public class Person implements Serializable {
@@ -19,6 +20,7 @@ public class Person implements Serializable {
 
     @Column(name = "first_name", nullable = false, length = 80)
     private String firstName;
+    @SuppressWarnings("JpaDataSourceORMInspection")
     @Column(name = "last_name", nullable = false, length = 80)
     private String lastName;
     @Column(name = "address", nullable = false, length = 100)
@@ -27,14 +29,6 @@ public class Person implements Serializable {
     private String gender;
 
     public Person() {
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getFirstName() {

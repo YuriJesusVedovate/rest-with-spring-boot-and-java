@@ -6,7 +6,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class StartupTests {
 
-	@Test
+	@SuppressWarnings("EmptyMethod")
+    @Test
 	void contextLoads() {
 	}
 

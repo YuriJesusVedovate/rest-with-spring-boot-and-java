@@ -3,7 +3,6 @@ package br.com.yuri.services.person;
 import br.com.yuri.exceptions.ResourceNotFoundException;
 import br.com.yuri.models.Person;
 import br.com.yuri.repositories.IPersonRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,7 +11,7 @@ import java.util.logging.Logger;
 @Service
 public class PersonService {
 
-    private Logger logger = Logger.getLogger(PersonService.class.getName());
+    private final Logger logger = Logger.getLogger(PersonService.class.getName());
 
     final
     IPersonRepository personRepository;
@@ -51,9 +50,9 @@ public class PersonService {
         return personRepository.save(personById);
     }
 
-    public void delete(Long id){
+    public void delete(Long id) {
         logger.info("Deleting person with id: " + id);
-        Person personById = personRepository.findById(id)
+        personRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Person not found for this id: " + id));
 
         personRepository.deleteById(id);

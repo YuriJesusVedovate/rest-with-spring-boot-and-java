@@ -1,9 +1,6 @@
 package br.com.yuri.controllers;
 
 import br.com.yuri.services.math.MathService;
-import br.com.yuri.services.math.SimpleMathService;
-import br.com.yuri.exceptions.UnsupportedMathOperationException;
-import br.com.yuri.services.math.numberConverter.NumberConverterService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

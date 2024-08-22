@@ -4,44 +4,18 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
 
+@SuppressWarnings("unused")
 public class ExceptionResponse implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
 
-    private String message;
-    private Date timestamp = new Date();
-    private String details;
-
-    public ExceptionResponse() {
-    }
+    public final String message;
+    public final Date timestamp = new Date();
+    public final String details;
 
     public ExceptionResponse(String message, String details) {
         this.message = message;
-        this.details = details;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public Date getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(Date timestamp) {
-        this.timestamp = timestamp;
-    }
-
-    public String getDetails() {
-        return details;
-    }
-
-    public void setDetails(String details) {
         this.details = details;
     }
 }

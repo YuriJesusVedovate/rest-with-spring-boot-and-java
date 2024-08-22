@@ -23,6 +23,6 @@ public class SimpleMathService {
         }
 
         public Double squareRoot(Double number) {
-            return (Double) Math.sqrt(number);
+            return Math.sqrt(number);
         }
 }
