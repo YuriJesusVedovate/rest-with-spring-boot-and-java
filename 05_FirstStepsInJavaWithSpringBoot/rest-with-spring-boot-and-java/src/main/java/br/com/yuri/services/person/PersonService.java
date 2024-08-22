@@ -2,7 +2,7 @@ package br.com.yuri.services.person;
 
 import br.com.yuri.data.vo.PersonVO;
 import br.com.yuri.exceptions.ResourceNotFoundException;
-import br.com.yuri.mapper.DozerMapper;
+import br.com.yuri.mapper.Mapper;
 import br.com.yuri.models.Person;
 import br.com.yuri.repositories.IPersonRepository;
 import org.springframework.stereotype.Service;
@@ -25,7 +25,7 @@ public class PersonService {
     public List<PersonVO> findAll() {
         logger.info("Finding all people");
         List<Person> people = personRepository.findAll();
-        return DozerMapper.parseListObjects(people, PersonVO.class);
+        return Mapper.parseListObjects(people, PersonVO.class);
     }
 
     public PersonVO findById(Long id) {
@@ -34,14 +34,14 @@ public class PersonService {
         Person entity = personRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Person not found for this id: " + id));
 
-        return DozerMapper.parseObject(entity, PersonVO.class);
+        return Mapper.parseObject(entity, PersonVO.class);
     }
 
     public PersonVO create(PersonVO request) {
         logger.info("Creating person: " + request.getFirstName());
-        Person person = DozerMapper.parseObject(request, Person.class);
+        Person person = Mapper.parseObject(request, Person.class);
         person = personRepository.save(person);
-        return DozerMapper.parseObject(person, PersonVO.class);
+        return Mapper.parseObject(person, PersonVO.class);
     }
 
     public PersonVO update(PersonVO request, Long id) {
@@ -57,7 +57,7 @@ public class PersonService {
 
         personRepository.save(person);
 
-        return DozerMapper.parseObject(person, PersonVO.class);
+        return Mapper.parseObject(person, PersonVO.class);
     }
 
     public void delete(Long id) {
