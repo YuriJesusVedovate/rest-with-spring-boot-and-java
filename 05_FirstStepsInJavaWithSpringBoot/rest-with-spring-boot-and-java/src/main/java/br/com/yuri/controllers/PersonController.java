@@ -1,6 +1,6 @@
 package br.com.yuri.controllers;
 
-import br.com.yuri.models.Person;
+import br.com.yuri.data.vo.PersonVO;
 import br.com.yuri.services.person.PersonService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,22 +18,22 @@ public class PersonController {
     }
 
     @GetMapping(value = "/{id}")
-    public Person findById(@PathVariable Long id) {
+    public PersonVO findById(@PathVariable Long id) {
         return service.findById(id);
     }
 
     @GetMapping("/all")
-    public List<Person> all() {
+    public List<PersonVO> all() {
         return service.findAll();
     }
 
     @PostMapping()
-    public Person create(@RequestBody Person person) {
+    public PersonVO create(@RequestBody PersonVO person) {
         return service.create(person);
     }
 
     @PutMapping("/{id}")
-    public Person update(@RequestBody Person person, @PathVariable Long id) {
+    public PersonVO update(@RequestBody PersonVO person, @PathVariable Long id) {
         return service.update(person, id);
     }
 
