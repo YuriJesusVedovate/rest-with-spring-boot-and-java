@@ -1,9 +1,13 @@
 package br.com.yuri.data.vo.v1;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
+@JsonPropertyOrder({"id", "firstName", "lastName", "address", "gender"})
 public class PersonVO implements Serializable {
 
     @Serial
@@ -11,6 +15,7 @@ public class PersonVO implements Serializable {
 
 
     private long id;
+    @JsonProperty("Nome")
     private String firstName;
     private String lastName;
     private String address;
