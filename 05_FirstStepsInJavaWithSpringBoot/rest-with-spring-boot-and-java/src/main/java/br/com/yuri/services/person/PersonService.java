@@ -60,8 +60,7 @@ public class PersonService {
     public PersonVO update(PersonVO request, Long id) {
         logger.info("Updating person by id: " + id);
 
-        Person person = personRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Person not found for this id: " + id));
+        Person person = getPersonById(id);
 
         person.setFirstName(request.getFirstName());
         person.setLastName(request.getLastName());
@@ -95,6 +94,11 @@ public class PersonService {
                 .orElseThrow(() -> new ResourceNotFoundException("Person not found for this id: " + id));
 
         personRepository.deleteById(id);
+    }
+
+    private Person getPersonById(Long id) {
+        return personRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Person not found for this id: " + id));
     }
 
 }

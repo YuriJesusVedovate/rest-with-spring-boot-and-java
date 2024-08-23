@@ -4,8 +4,6 @@ import br.com.yuri.data.vo.v2.PersonVOV2;
 import br.com.yuri.services.person.PersonService;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/person/v2")
 public class PersonV2Controller {

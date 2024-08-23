@@ -10,7 +10,6 @@ public class PersonVOV2 implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
-
     private long id;
     private String firstName;
     private String lastName;
@@ -50,20 +49,19 @@ public class PersonVOV2 implements Serializable {
         this.gender = gender;
     }
 
-    public Date getBirthDay() { return birthDay; }
     public void setBirthDay(Date birthDay) { this.birthDay = birthDay; }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        PersonVOV2 person = (PersonVOV2) o;
-        return id == person.id && Objects.equals(firstName, person.firstName) && Objects.equals(lastName, person.lastName) && Objects.equals(address, person.address) && Objects.equals(gender, person.gender);
+        PersonVOV2 that = (PersonVOV2) o;
+        return id == that.id && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && Objects.equals(address, that.address) && Objects.equals(gender, that.gender) && Objects.equals(birthDay, that.birthDay);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, address, gender);
+        return Objects.hash(id, firstName, lastName, address, gender, birthDay);
     }
 }
 
