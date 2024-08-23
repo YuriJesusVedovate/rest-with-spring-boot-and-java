@@ -4,6 +4,7 @@ import br.com.yuri.data.vo.v1.PersonVO;
 import br.com.yuri.data.vo.v2.PersonVOV2;
 import br.com.yuri.exceptions.ResourceNotFoundException;
 import br.com.yuri.mapper.Mapper;
+import br.com.yuri.mapper.custom.PersonMapper;
 import br.com.yuri.models.Person;
 import br.com.yuri.repositories.IPersonRepository;
 import org.springframework.stereotype.Service;
@@ -17,10 +18,14 @@ public class PersonService {
     private final Logger logger = Logger.getLogger(PersonService.class.getName());
 
     final
-    IPersonRepository personRepository;
+    private IPersonRepository personRepository;
+    final
+    private PersonMapper personMapper;
 
-    public PersonService(IPersonRepository personRepository) {
+
+    public PersonService(IPersonRepository personRepository, PersonMapper personMapper) {
         this.personRepository = personRepository;
+        this.personMapper = personMapper;
     }
 
     public List<PersonVO> findAll() {
@@ -47,9 +52,9 @@ public class PersonService {
 
     public PersonVOV2 createV2(PersonVOV2 request) {
         logger.info("Creating person V2: " + request.getFirstName());
-        Person person = Mapper.parseObject(request, Person.class);
+        Person person = personMapper.ConvertVOToEntity(request);
         person = personRepository.save(person);
-        return Mapper.parseObject(person, PersonVOV2.class);
+        return personMapper.ConvertEntityToVO(person);
     }
 
     public PersonVO update(PersonVO request, Long id) {
@@ -81,7 +86,7 @@ public class PersonService {
 
         personRepository.save(person);
 
-        return Mapper.parseObject(person, PersonVOV2.class);
+        return personMapper.ConvertEntityToVO(person);
     }
 
     public void delete(Long id) {
