@@ -12,7 +12,7 @@ import br.com.yuri.mapper.Mapper;
 import br.com.yuri.models.Person;
 import br.com.yuri.unittests.mapper.mocks.MockPerson;
 
-public class DozerConverterTest {
+public class MapperTest {
     
     MockPerson inputObject;
 
