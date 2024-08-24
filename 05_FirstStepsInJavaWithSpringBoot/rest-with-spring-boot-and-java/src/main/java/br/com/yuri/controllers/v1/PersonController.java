@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static br.com.yuri.util.MediaType.*;
+
 @RestController
 @RequestMapping("/person")
 public class PersonController {
@@ -17,27 +19,39 @@ public class PersonController {
         this.service = service;
     }
 
-    @GetMapping(value = "/{id}")
+    @GetMapping(
+            value = "/{id}",
+            produces = {APPLICATION_JSON, APPLICATION_XML, APPLICATION_YML},
+            consumes = {APPLICATION_JSON, APPLICATION_XML, APPLICATION_YML})
     public PersonVO findById(@PathVariable Long id) {
         return service.findById(id);
     }
 
-    @GetMapping("/all")
+    @GetMapping(
+            value = "/all",
+            produces = {APPLICATION_JSON, APPLICATION_XML, APPLICATION_YML},
+            consumes = {APPLICATION_JSON, APPLICATION_XML, APPLICATION_YML})
     public List<PersonVO> all() {
         return service.findAll();
     }
 
-    @PostMapping()
+    @PostMapping(
+            produces = {APPLICATION_JSON, APPLICATION_XML, APPLICATION_YML},
+            consumes = {APPLICATION_JSON, APPLICATION_XML, APPLICATION_YML})
     public PersonVO create(@RequestBody PersonVO person) {
         return service.create(person);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping(
+            value = "/{id}",
+            produces = {APPLICATION_JSON, APPLICATION_XML, APPLICATION_YML},
+            consumes = {APPLICATION_JSON, APPLICATION_XML, APPLICATION_YML})
     public PersonVO update(@RequestBody PersonVO person, @PathVariable Long id) {
         return service.update(person, id);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping(
+            value = "/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
