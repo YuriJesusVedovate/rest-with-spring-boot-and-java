@@ -53,7 +53,9 @@ public class PersonService {
         logger.info("Creating person: " + request.getFirstName());
         Person person = Mapper.parseObject(request, Person.class);
         person = personRepository.save(person);
-        return Mapper.parseObject(person, PersonVO.class);
+        PersonVO vo = Mapper.parseObject(person, PersonVO.class);
+        vo.add(linkTo(methodOn(PersonController.class).findById(person.getId())).withSelfRel());
+        return vo;
     }
 
     public PersonVOV2 createV2(PersonVOV2 request) {
@@ -75,7 +77,9 @@ public class PersonService {
 
         personRepository.save(person);
 
-        return Mapper.parseObject(person, PersonVO.class);
+        PersonVO vo = Mapper.parseObject(person, PersonVO.class);
+        vo.add(linkTo(methodOn(PersonController.class).findById(person.getId())).withSelfRel());
+        return vo;
     }
 
     public PersonVOV2 updateV2(PersonVOV2 request, Long id) {
