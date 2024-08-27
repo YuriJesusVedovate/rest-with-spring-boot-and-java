@@ -1,5 +1,6 @@
 package br.com.yuri.services.person;
 
+import br.com.yuri.controllers.v1.PersonController;
 import br.com.yuri.data.vo.v1.PersonVO;
 import br.com.yuri.data.vo.v2.PersonVOV2;
 import br.com.yuri.exceptions.ResourceNotFoundException;
@@ -11,6 +12,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.logging.Logger;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Service
 public class PersonService {
@@ -40,7 +44,9 @@ public class PersonService {
         Person entity = personRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Person not found for this id: " + id));
 
-        return Mapper.parseObject(entity, PersonVO.class);
+        PersonVO vo = Mapper.parseObject(entity, PersonVO.class);
+        vo.add(linkTo(methodOn(PersonController.class).findById(id)).withSelfRel());
+        return vo;
     }
 
     public PersonVO create(PersonVO request) {
