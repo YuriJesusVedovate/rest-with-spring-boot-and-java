@@ -14,12 +14,15 @@ public class PersonVO extends RepresentationModel<PersonVO> implements Serializa
     @Serial
     private static final long serialVersionUID = 1L;
 
-
+    @JsonProperty("id")
     private long key;
     @JsonProperty("Nome")
     private String firstName;
+    @JsonProperty("Sobrenome")
     private String lastName;
+    @JsonProperty("Endereço")
     private String address;
+    @JsonProperty("Genero")
     private String gender;
 
 
