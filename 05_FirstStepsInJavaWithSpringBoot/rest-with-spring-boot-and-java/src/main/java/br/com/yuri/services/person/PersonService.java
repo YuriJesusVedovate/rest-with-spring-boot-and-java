@@ -35,7 +35,9 @@ public class PersonService {
     public List<PersonVO> findAll() {
         logger.info("Finding all people");
         List<Person> people = personRepository.findAll();
-        return Mapper.parseListObjects(people, PersonVO.class);
+        var persons = Mapper.parseListObjects(people, PersonVO.class);
+        persons.forEach(p -> p.add(linkTo(methodOn(PersonController.class).findById(p.getKey())).withSelfRel()));
+        return persons;
     }
 
     public PersonVO findById(Long id) {
@@ -44,18 +46,18 @@ public class PersonService {
         Person entity = personRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Person not found for this id: " + id));
 
-        PersonVO vo = Mapper.parseObject(entity, PersonVO.class);
-        vo.add(linkTo(methodOn(PersonController.class).findById(id)).withSelfRel());
-        return vo;
+        PersonVO result = Mapper.parseObject(entity, PersonVO.class);
+        result.add(linkTo(methodOn(PersonController.class).findById(id)).withSelfRel());
+        return result;
     }
 
     public PersonVO create(PersonVO request) {
         logger.info("Creating person: " + request.getFirstName());
         Person person = Mapper.parseObject(request, Person.class);
         person = personRepository.save(person);
-        PersonVO vo = Mapper.parseObject(person, PersonVO.class);
-        vo.add(linkTo(methodOn(PersonController.class).findById(person.getId())).withSelfRel());
-        return vo;
+        PersonVO result = Mapper.parseObject(person, PersonVO.class);
+        result.add(linkTo(methodOn(PersonController.class).findById(person.getId())).withSelfRel());
+        return result;
     }
 
     public PersonVOV2 createV2(PersonVOV2 request) {
@@ -77,9 +79,9 @@ public class PersonService {
 
         personRepository.save(person);
 
-        PersonVO vo = Mapper.parseObject(person, PersonVO.class);
-        vo.add(linkTo(methodOn(PersonController.class).findById(person.getId())).withSelfRel());
-        return vo;
+        PersonVO result = Mapper.parseObject(person, PersonVO.class);
+        result.add(linkTo(methodOn(PersonController.class).findById(person.getId())).withSelfRel());
+        return result;
     }
 
     public PersonVOV2 updateV2(PersonVOV2 request, Long id) {
