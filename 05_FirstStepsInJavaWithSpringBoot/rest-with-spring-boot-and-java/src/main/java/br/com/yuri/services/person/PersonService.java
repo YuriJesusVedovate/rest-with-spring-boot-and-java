@@ -19,7 +19,6 @@ public class PersonService {
 
     private final Logger logger = Logger.getLogger(PersonService.class.getName());
 
-    final
     private IPersonRepository personRepository;
 
 

@@ -1,6 +1,7 @@
 package br.com.yuri.services.person;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import br.com.yuri.data.vo.PersonVO;
@@ -15,11 +16,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Optional;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @ExtendWith(MockitoExtension.class)
+@SpringBootTest
 class PersonServiceTest {
 
 	MockPerson input;
@@ -47,12 +50,11 @@ class PersonServiceTest {
 
 		assertNotNull(result);
 		assertNotNull(result.getLinks());
-
-		assertTrue(result.toString().contains("links: [</api/entity/1>;rel=\"self\"]"));
-
-		assertEquals("First Name Test0", result.getFirstName());
-		assertEquals("Last Name Test0", result.getLastName());
-		assertEquals("Addres Test0", result.getAddress());
+		assertTrue(result.toString().contains("links: [<http://localhost/person/1>;rel=\"self\"]"));
+		assertEquals("First Name Test1", result.getFirstName());
+		assertEquals("Last Name Test1", result.getLastName());
+		assertEquals("Addres Test1", result.getAddress());
+		assertEquals("Female", result.getGender());
 	}
 
 	@Test
@@ -62,26 +64,23 @@ class PersonServiceTest {
 
 	@Test
 	void testCreate() {
-		Person entity = input.mockEntity(1);
-
-		Person persisted = entity;
+		Person persisted = input.mockEntity(1);;
 		persisted.setId(1L);
 
 		PersonVO vo = input.mockVO(1);
 		vo.setKey(1L);
 
-		when(repository.save(entity)).thenReturn(persisted);
+		when(repository.save(any(Person.class))).thenReturn(persisted);
 
 		var result = service.create(vo);
 
 		assertNotNull(result);
 		assertNotNull(result.getLinks());
-
-		assertTrue(result.toString().contains("links: [</api/entity/1>;rel=\"self\"]"));
-
+		assertTrue(result.toString().contains("links: [<http://localhost/person/1>;rel=\"self\"]"));
 		assertEquals("First Name Test1", result.getFirstName());
 		assertEquals("Last Name Test1", result.getLastName());
 		assertEquals("Addres Test1", result.getAddress());
+		assertEquals("Female", result.getGender());
 	}
 
 	@Test
@@ -102,12 +101,11 @@ class PersonServiceTest {
 
 		assertNotNull(result);
 		assertNotNull(result.getLinks());
-
-		assertTrue(result.toString().contains("links: [</api/entity/1>;rel=\"self\"]"));
-
+		assertTrue(result.toString().contains("links: [<http://localhost/person/1>;rel=\"self\"]"));
 		assertEquals("First Name Test1", result.getFirstName());
 		assertEquals("Last Name Test1", result.getLastName());
 		assertEquals("Addres Test1", result.getAddress());
+		assertEquals("Female", result.getGender());
 	}
 
 	@Test
