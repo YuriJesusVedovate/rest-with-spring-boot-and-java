@@ -2,6 +2,7 @@ package br.com.yuri.services.person;
 
 import br.com.yuri.controllers.PersonController;
 import br.com.yuri.data.vo.PersonVO;
+import br.com.yuri.exceptions.RequiredObjectIsNullException;
 import br.com.yuri.exceptions.ResourceNotFoundException;
 import br.com.yuri.mapper.Mapper;
 import br.com.yuri.models.Person;
@@ -46,6 +47,7 @@ public class PersonService {
     }
 
     public PersonVO create(PersonVO request) {
+        validateRequestPersonVO(request);
         logger.info("Creating person: " + request.getFirstName());
         Person person = Mapper.parseObject(request, Person.class);
         person = personRepository.save(person);
@@ -55,6 +57,7 @@ public class PersonService {
     }
 
     public PersonVO update(PersonVO request, Long id) {
+        validateRequestPersonVO(request);
         logger.info("Updating person by id: " + id);
 
         Person person = getPersonById(id);
@@ -82,6 +85,25 @@ public class PersonService {
     private Person getPersonById(Long id) {
         return personRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Person not found for this id: " + id));
+    }
+
+    private static void validateRequestPersonVO(PersonVO request) {
+        if (isNullOrEmpty(request.getFirstName())) {
+            throw new RequiredObjectIsNullException("FirstName cannot be null");
+        }
+        if (isNullOrEmpty(request.getLastName())) {
+            throw new RequiredObjectIsNullException("LastName cannot be null");
+        }
+        if (isNullOrEmpty(request.getAddress())) {
+            throw new RequiredObjectIsNullException("Address cannot be null");
+        }
+        if (isNullOrEmpty(request.getGender())) {
+            throw new RequiredObjectIsNullException("Gender cannot be null");
+        }
+    }
+
+    private static boolean isNullOrEmpty(String str) {
+        return str == null || str.isBlank();
     }
 
 }
