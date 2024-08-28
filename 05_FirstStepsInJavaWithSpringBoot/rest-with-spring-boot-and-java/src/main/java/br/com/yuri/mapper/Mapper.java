@@ -1,6 +1,6 @@
 package br.com.yuri.mapper;
 
-import br.com.yuri.data.vo.v1.PersonVO;
+import br.com.yuri.data.vo.PersonVO;
 import br.com.yuri.models.Person;
 import org.modelmapper.ModelMapper;
 

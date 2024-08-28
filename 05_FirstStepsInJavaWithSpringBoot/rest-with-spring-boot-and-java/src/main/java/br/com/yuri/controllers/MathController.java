@@ -1,4 +1,4 @@
-package br.com.yuri.controllers.v1;
+package br.com.yuri.controllers;
 
 import br.com.yuri.services.math.MathService;
 import org.springframework.web.bind.annotation.GetMapping;

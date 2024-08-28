@@ -3,7 +3,7 @@ package br.com.yuri.unittests.mapper.mocks;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.yuri.data.vo.v1.PersonVO;
+import br.com.yuri.data.vo.PersonVO;
 import br.com.yuri.models.Person;
 
 public class MockPerson {

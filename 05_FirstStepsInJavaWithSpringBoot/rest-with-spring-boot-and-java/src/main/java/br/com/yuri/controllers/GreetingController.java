@@ -1,4 +1,4 @@
-package br.com.yuri.controllers.v1;
+package br.com.yuri.controllers;
 
 import java.util.concurrent.atomic.AtomicLong;
 

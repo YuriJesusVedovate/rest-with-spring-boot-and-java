@@ -1,6 +1,6 @@
-package br.com.yuri.controllers.v1;
+package br.com.yuri.controllers;
 
-import br.com.yuri.data.vo.v1.PersonVO;
+import br.com.yuri.data.vo.PersonVO;
 import br.com.yuri.services.person.PersonService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
