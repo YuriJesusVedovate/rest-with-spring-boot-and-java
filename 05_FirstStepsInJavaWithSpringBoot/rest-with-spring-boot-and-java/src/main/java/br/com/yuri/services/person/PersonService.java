@@ -4,7 +4,6 @@ import br.com.yuri.controllers.PersonController;
 import br.com.yuri.data.vo.PersonVO;
 import br.com.yuri.exceptions.ResourceNotFoundException;
 import br.com.yuri.mapper.Mapper;
-import br.com.yuri.mapper.custom.PersonMapper;
 import br.com.yuri.models.Person;
 import br.com.yuri.repositories.IPersonRepository;
 import org.springframework.stereotype.Service;
@@ -22,13 +21,10 @@ public class PersonService {
 
     final
     private IPersonRepository personRepository;
-    final
-    private PersonMapper personMapper;
 
 
-    public PersonService(IPersonRepository personRepository, PersonMapper personMapper) {
+    public PersonService(IPersonRepository personRepository) {
         this.personRepository = personRepository;
-        this.personMapper = personMapper;
     }
 
     public List<PersonVO> findAll() {
