@@ -5,6 +5,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import br.com.yuri.data.vo.PersonVO;
+import br.com.yuri.exceptions.RequiredObjectIsNullException;
 import br.com.yuri.models.Person;
 import br.com.yuri.repositories.IPersonRepository;
 import br.com.yuri.unittests.mapper.mocks.MockPerson;
@@ -18,6 +19,7 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
 import java.util.Optional;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -59,7 +61,20 @@ class PersonServiceTest {
 
 	@Test
 	void testFindAll() {
-		fail("Not yet implemented");
+		List<Person> list = input.mockEntityList();
+		when(repository.findAll()).thenReturn(list);
+		var result = service.findAll();
+
+		assertNotNull(result);
+		assertEquals(14, result.size());
+
+		var personOne = result.get(1);
+
+		assertNotNull(personOne);
+		assertEquals("First Name Test1", personOne.getFirstName());
+		assertEquals("Last Name Test1", personOne.getLastName());
+		assertEquals("Addres Test1", personOne.getAddress());
+		assertEquals("Female", personOne.getGender());
 	}
 
 	@Test
@@ -84,6 +99,18 @@ class PersonServiceTest {
 	}
 
 	@Test
+	void testCreateWithNullPerson() {
+
+		PersonVO vo = null;
+		Exception exception = assertThrows(RequiredObjectIsNullException.class, () -> service.create(vo));
+
+		String expectedMessage = "Person cannot be null";
+		String actualMessage = exception.getMessage();
+
+		assertTrue(actualMessage.contains(expectedMessage));
+	}
+
+	@Test
 	void testUpdate() {
 		Person entity = input.mockEntity(1);
         entity.setId(1L);
@@ -103,6 +130,17 @@ class PersonServiceTest {
 		assertEquals("Last Name Test1", result.getLastName());
 		assertEquals("Addres Test1", result.getAddress());
 		assertEquals("Female", result.getGender());
+	}
+
+	@Test
+	void testUpdateWithNullPerson() {
+		PersonVO vo = null;
+		Exception exception = assertThrows(RequiredObjectIsNullException.class, () -> service.update(vo, 1L));
+
+		String expectedMessage = "Person cannot be null";
+		String actualMessage = exception.getMessage();
+
+		assertTrue(actualMessage.contains(expectedMessage));
 	}
 
 	@Test

@@ -88,6 +88,9 @@ public class PersonService {
     }
 
     private static void validateRequestPersonVO(PersonVO request) {
+        if (request == null) {
+            throw new RequiredObjectIsNullException("Person cannot be null");
+        }
         if (isNullOrEmpty(request.getFirstName())) {
             throw new RequiredObjectIsNullException("FirstName cannot be null");
         }
