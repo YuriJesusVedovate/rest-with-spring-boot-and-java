@@ -23,31 +23,31 @@ public class PersonController {
             value = "/{id}",
             produces = {APPLICATION_JSON, APPLICATION_XML, APPLICATION_YML},
             consumes = {APPLICATION_JSON, APPLICATION_XML, APPLICATION_YML})
-    public PersonVO findById(@PathVariable Long id) {
-        return service.findById(id);
+    public ResponseEntity<PersonVO> findById(@PathVariable Long id) {
+        return ResponseEntity.ok(service.findById(id));
     }
 
     @GetMapping(
             value = "/all",
             produces = {APPLICATION_JSON, APPLICATION_XML, APPLICATION_YML},
             consumes = {APPLICATION_JSON, APPLICATION_XML, APPLICATION_YML})
-    public List<PersonVO> all() {
-        return service.findAll();
+    public ResponseEntity<List<PersonVO>> all() {
+        return ResponseEntity.ok(service.findAll());
     }
 
     @PostMapping(
             produces = {APPLICATION_JSON, APPLICATION_XML, APPLICATION_YML},
             consumes = {APPLICATION_JSON, APPLICATION_XML, APPLICATION_YML})
-    public PersonVO create(@RequestBody PersonVO person) {
-        return service.create(person);
+    public ResponseEntity<PersonVO> create(@RequestBody PersonVO person) {
+        return ResponseEntity.ok(service.create(person));
     }
 
     @PutMapping(
             value = "/{id}",
             produces = {APPLICATION_JSON, APPLICATION_XML, APPLICATION_YML},
             consumes = {APPLICATION_JSON, APPLICATION_XML, APPLICATION_YML})
-    public PersonVO update(@RequestBody PersonVO person, @PathVariable Long id) {
-        return service.update(person, id);
+    public ResponseEntity<PersonVO> update(@RequestBody PersonVO person, @PathVariable Long id) {
+        return ResponseEntity.ok(service.update(person, id));
     }
 
     @DeleteMapping(
