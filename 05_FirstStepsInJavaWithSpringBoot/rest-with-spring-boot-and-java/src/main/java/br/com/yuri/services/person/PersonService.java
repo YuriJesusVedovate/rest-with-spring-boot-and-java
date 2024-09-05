@@ -6,7 +6,7 @@ import br.com.yuri.exceptions.RequiredObjectIsNullException;
 import br.com.yuri.exceptions.ResourceNotFoundException;
 import br.com.yuri.mapper.Mapper;
 import br.com.yuri.models.Person;
-import br.com.yuri.repositories.IPersonRepository;
+import br.com.yuri.repositories.PersonRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,10 +20,10 @@ public class PersonService {
 
     private final Logger logger = Logger.getLogger(PersonService.class.getName());
 
-    private IPersonRepository personRepository;
+    private PersonRepository personRepository;
 
 
-    public PersonService(IPersonRepository personRepository) {
+    public PersonService(PersonRepository personRepository) {
         this.personRepository = personRepository;
     }
 

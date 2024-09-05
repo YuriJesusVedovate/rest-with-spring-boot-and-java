@@ -7,7 +7,7 @@ import static org.mockito.Mockito.when;
 import br.com.yuri.data.vo.PersonVO;
 import br.com.yuri.exceptions.RequiredObjectIsNullException;
 import br.com.yuri.models.Person;
-import br.com.yuri.repositories.IPersonRepository;
+import br.com.yuri.repositories.PersonRepository;
 import br.com.yuri.unittests.mapper.mocks.MockPerson;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,7 +33,7 @@ class PersonServiceTest {
 	private PersonService service;
 
 	@Mock
-	private IPersonRepository repository;
+	private PersonRepository repository;
 
 	@BeforeEach
 	void setUpMocks() throws Exception {
