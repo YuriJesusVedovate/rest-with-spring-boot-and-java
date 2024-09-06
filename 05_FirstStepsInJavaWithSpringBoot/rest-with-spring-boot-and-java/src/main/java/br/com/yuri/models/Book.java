@@ -18,7 +18,7 @@ public class Book {
     @Column(name = "launch_date", nullable = false)
     private Date releaseDate;
     @Column(name = "price", nullable = false)
-    private boolean price;
+    private double price;
     @Column(name = "title", nullable = false, length = 80)
     private String title;
 
@@ -33,11 +33,11 @@ public class Book {
         this.title = title;
     }
 
-    public boolean isPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(boolean price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 

@@ -4,6 +4,7 @@ import org.springframework.hateoas.RepresentationModel;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Objects;
 
 public class BookVO extends RepresentationModel<BookVO> implements Serializable {
@@ -13,7 +14,7 @@ public class BookVO extends RepresentationModel<BookVO> implements Serializable 
 
     private Long id;
     private String author;
-    private String releaseDate;
+    private Date releaseDate;
     private Double price;
     private String title;
 
@@ -31,10 +32,10 @@ public class BookVO extends RepresentationModel<BookVO> implements Serializable 
         this.author = author;
     }
 
-    public String getReleaseDate() {
+    public Date getReleaseDate() {
         return releaseDate;
     }
-    public void setReleaseDate(String releaseDate) {
+    public void setReleaseDate(Date releaseDate) {
         this.releaseDate = releaseDate;
     }
 
