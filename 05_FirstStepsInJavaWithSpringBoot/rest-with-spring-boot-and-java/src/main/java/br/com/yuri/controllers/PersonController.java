@@ -28,8 +28,7 @@ public class PersonController {
 
     @GetMapping(
             value = "/{id}",
-            produces = {APPLICATION_JSON, APPLICATION_XML, APPLICATION_YML},
-            consumes = {APPLICATION_JSON, APPLICATION_XML, APPLICATION_YML})
+            produces = {APPLICATION_JSON, APPLICATION_XML, APPLICATION_YML})
     @Operation(summary = "Find by id person recorded in the database", description = "Find by id person recorded in the database", tags = {"Person Endpoint"}, responses = {
             @ApiResponse(responseCode = "200", description = "Success", content = @Content(mediaType = APPLICATION_JSON, schema = @Schema(implementation = PersonVO.class))),
             @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content),
@@ -43,8 +42,7 @@ public class PersonController {
 
     @GetMapping(
             value = "/all",
-            produces = {APPLICATION_JSON, APPLICATION_XML, APPLICATION_YML},
-            consumes = {APPLICATION_JSON, APPLICATION_XML, APPLICATION_YML})
+            produces = {APPLICATION_JSON, APPLICATION_XML, APPLICATION_YML})
     @Operation(summary = "Find all people recorded in the database", description = "Find all people recorded in the database", tags = {"Person Endpoint"}, responses = {
             @ApiResponse(responseCode = "200", description = "Success", content = {
                     @Content(mediaType = APPLICATION_JSON, array = @ArraySchema(schema = @Schema(implementation = PersonVO.class)))
@@ -59,8 +57,7 @@ public class PersonController {
     }
 
     @PostMapping(
-            produces = {APPLICATION_JSON, APPLICATION_XML, APPLICATION_YML},
-            consumes = {APPLICATION_JSON, APPLICATION_XML, APPLICATION_YML})
+            produces = {APPLICATION_JSON, APPLICATION_XML, APPLICATION_YML})
     @Operation(summary = "Adds a new person", description = "Adds a new Person by passing in a JSON, XML or YML representation of the person!", tags = {"Person Endpoint"}, responses = {
             @ApiResponse(responseCode = "200", description = "Success", content = @Content(mediaType = APPLICATION_JSON, schema = @Schema(implementation = PersonVO.class))),
             @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content),
@@ -73,8 +70,7 @@ public class PersonController {
 
     @PutMapping(
             value = "/{id}",
-            produces = {APPLICATION_JSON, APPLICATION_XML, APPLICATION_YML},
-            consumes = {APPLICATION_JSON, APPLICATION_XML, APPLICATION_YML})
+            produces = {APPLICATION_JSON, APPLICATION_XML, APPLICATION_YML})
     @Operation(summary = "Update a person by id", description = "Update a Person by id passing in a JSON, XML or YML representation of the person!", tags = {"Person Endpoint"}, responses = {
             @ApiResponse(responseCode = "200", description = "Success", content = @Content(mediaType = APPLICATION_JSON, schema = @Schema(implementation = PersonVO.class))),
             @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content),

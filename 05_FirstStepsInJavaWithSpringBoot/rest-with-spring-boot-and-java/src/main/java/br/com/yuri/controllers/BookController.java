@@ -36,7 +36,7 @@ public class BookController {
             @ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content),
             @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content)
     })
-    public ResponseEntity<BookVO> findById(Long id) {
+    public ResponseEntity<BookVO> findById(@PathVariable Long id) {
         return ResponseEntity.ok(service.findById(id));
     }
 
@@ -95,8 +95,5 @@ public class BookController {
         service.delete(id);
         return ResponseEntity.ok("Book deleted");
     }
-
-    //TODO Verificar double na criação
-
 
 }
