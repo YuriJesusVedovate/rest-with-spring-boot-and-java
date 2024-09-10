@@ -64,7 +64,7 @@ public class BookController {
             @ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content),
             @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content)
     })
-    public ResponseEntity<BookVO> create(BookVO request) {
+    public ResponseEntity<BookVO> create(@RequestBody BookVO request) {
         return ResponseEntity.ok(service.create(request));
     }
 
@@ -78,7 +78,7 @@ public class BookController {
             @ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content),
             @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content)
     })
-    public ResponseEntity<BookVO> update(BookVO request, Long id) {
+    public ResponseEntity<BookVO> update(@RequestBody BookVO request, @PathVariable Long id) {
         return ResponseEntity.ok(service.update(request, id));
     }
 
@@ -91,7 +91,7 @@ public class BookController {
             @ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content),
             @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content)
     })
-    public ResponseEntity<String> delete(Long id) {
+    public ResponseEntity<String> delete(@PathVariable Long id) {
         service.delete(id);
         return ResponseEntity.ok("Book deleted");
     }
