@@ -2,6 +2,7 @@ package br.com.yuri.services.book;
 
 import br.com.yuri.controllers.BookController;
 import br.com.yuri.data.vo.BookVO;
+import br.com.yuri.exceptions.RequiredObjectIsNullException;
 import br.com.yuri.exceptions.ResourceNotFoundException;
 import br.com.yuri.mapper.Mapper;
 import br.com.yuri.models.Book;
@@ -36,8 +37,7 @@ public class BookService {
     public BookVO findById(Long id) {
         logger.info("Finding book by id: " + id);
 
-        Book entity = bookRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Book not found for this id: " + id));
+        Book entity = getBookById(id);
 
         BookVO result = Mapper.parseObject(entity, BookVO.class);
         result.add(linkTo(methodOn(BookController.class).findById(id)).withSelfRel());
@@ -45,6 +45,7 @@ public class BookService {
     }
 
     public BookVO create(BookVO request) {
+        validateRequestBookVO(request);
         logger.info("Creating book: " + request.getTitle());
         Book book = Mapper.parseObject(request, Book.class);
         book = bookRepository.save(book);
@@ -54,10 +55,18 @@ public class BookService {
     }
 
     public BookVO update(BookVO request, Long id) {
+        validateRequestBookVO(request);
         logger.info("Updating book: " + request.getTitle());
-        Book book = Mapper.parseObject(request, Book.class);
-        book.setId(id);
+
+        Book book = getBookById(id);
+
+        book.setTitle(request.getTitle());
+        book.setAuthor(request.getAuthor());
+        book.setPrice(request.getPrice());
+        book.setReleaseDate(request.getReleaseDate());
+
         book = bookRepository.save(book);
+
         BookVO result = Mapper.parseObject(book, BookVO.class);
         result.add(linkTo(methodOn(BookController.class).findById(book.getId())).withSelfRel());
         return result;
@@ -65,7 +74,32 @@ public class BookService {
 
     public void delete(Long id) {
         logger.info("Deleting book by id: " + id);
+        getBookById(id);
+
         bookRepository.deleteById(id);
+    }
+
+    private Book getBookById(Long id) {
+        return bookRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Book not found for this id: " + id));
+    }
+    private void validateRequestBookVO(BookVO request) {
+        if (request == null) {
+            throw new RequiredObjectIsNullException("BookVO is required");
+        }
+        if (isNullOrEmpty(request.getTitle())) {
+            throw new RequiredObjectIsNullException("Title is required");
+        }
+        if (isNullOrEmpty(request.getAuthor())) {
+            throw new RequiredObjectIsNullException("Author is required");
+        }
+        if (request.getPrice() == null || request.getPrice() <= 0) {
+            throw new RequiredObjectIsNullException("Price is required");
+        }
+    }
+
+    private static boolean isNullOrEmpty(String str) {
+        return str == null || str.isBlank();
     }
 
 
