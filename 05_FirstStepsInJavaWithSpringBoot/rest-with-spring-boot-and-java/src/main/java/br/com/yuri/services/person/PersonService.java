@@ -76,8 +76,7 @@ public class PersonService {
 
     public void delete(Long id) {
         logger.info("Deleting person with id: " + id);
-        personRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Person not found for this id: " + id));
+        getPersonById(id);
 
         personRepository.deleteById(id);
     }
